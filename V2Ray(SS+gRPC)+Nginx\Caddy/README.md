@@ -13,16 +13,18 @@
 
 2、V2Ray 或 Xray 的监听地址不支持 Shadowsocks 协议使用 UDS 监听。
 
-3、V2Ray 版本不小于 v4.36.2 或 Xray 版本不小于 v1.4.0 才支持 gRPC 传输方式。
+3、V2Ray 版本不小于 v4.37.0 才支持 Shadowsocks 启用 IV 检查功能，可使某些 IV 重放攻击更加困难。
 
-4、Nginx 支持不同站点共用 443 端口需要 Nginx 包含 stream_core_module 和 stream_ssl_preread_module 模块。
+4、Xray 版本不小于 v1.7.0 才完美支持 Shadowsocks 2022 新协议，提升了性能并带有完整的重放保护。另各加密方式对应密钥生成办法见 [Xray 的 Shadowsocks 协议介绍](https://xtls.github.io/config/inbounds/shadowsocks.html#clientobject)。
 
-5、Nginx 支持 HTTP/2 server 需要 Nginx 包含 http_ssl_module 与 http_v2_module 模块等。
+5、Nginx 支持不同站点共用 443 端口需要 Nginx 包含 stream_core_module 和 stream_ssl_preread_module 模块。
 
-6、Nginx 支持请求标头还原为真实客户端地址需要 Nginx 包含 http_realip_module 模块。
+6、Nginx 支持 HTTP/2 server 需要 Nginx 包含 http_ssl_module 与 http_v2_module 模块等。
 
-7、若选用 Nginx 实现应用，不要使用 ACME 客户端在采用本示例的服务器上以 HTTP-01 或 TLS-ALPN-01 验证方式申请与更新 TLS 证书，因 HTTP-01 或 TLS-ALPN-01 验证方式申请与更新 TLS 证书需监听 80 或 443 端口，从而与当前应用端口冲突。
+7、Nginx 支持请求标头还原为真实客户端地址需要 Nginx 包含 http_realip_module 模块。
 
-8、若选用 Caddy 实现应用，本示例 Caddy 支持自动 HTTPS，即自动申请与更新 TLS 证书，自动 HTTP 重定向到 HTTPS。
+8、若选用 Nginx 实现应用，不要使用 ACME 客户端在采用本示例的服务器上以 HTTP-01 或 TLS-ALPN-01 验证方式申请与更新 TLS 证书，因 HTTP-01 或 TLS-ALPN-01 验证方式申请与更新 TLS 证书需监听 80 或 443 端口，从而与当前应用端口冲突。
 
-9、本示例兼容原版 Shadowsocks 加 v2ray-plugin 或 xray-plugin 插件的 grpc-tls 模式服务端应用，即客户端可使用 Shadowsocks 加 v2ray-plugin 或 xray-plugin 插件连接。
+9、若选用 Caddy 实现应用，本示例 Caddy 支持自动 HTTPS，即自动申请与更新 TLS 证书，自动 HTTP 重定向到 HTTPS。
+
+10、本示例兼容原版 Shadowsocks 加 v2ray-plugin 或 xray-plugin 插件的 grpc-tls 模式服务端应用，即客户端可使用 Shadowsocks 加 v2ray-plugin 或 xray-plugin 插件连接。
